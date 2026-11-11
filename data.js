@@ -49,16 +49,16 @@ const culinaryData = [
     servings: '6 Porsi'
   },
   {
-    id: 'rawon',
-    name: 'Rawon Sapi',
-    island: 'Jawa',
+    id: 'tinutuan',
+    name: 'Bubur Manado',
+    island: 'Sulawesi',
     category: 'heavy',
     image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
-    desc: 'Sup daging sapi berkuah hitam legam pekat yang menggunakan kluwek sebagai bumbu utama pemberi aroma khas.',
-    ingredients: ['500g Daging sapi (bagian berlemak)', '5 buah Keluwak, ambil isinya', 'Bumbu halus: Bawang merah, bawang putih, ketumbar, jintan, kunyit, jahe', 'Batang serai, lengkuas, daun jeruk'],
-    steps: ['1. Rebus daging sapi hingga empuk, potong dadu, saring kaldunya.', '2. Haluskan bumbu bersama daging keluwak yang sudah direndam air panas.', '3. Tumis bumbu halus hingga harum, lalu masukkan ke dalam air kaldu daging.', '4. Masukkan potongan daging, didihkan kembali bersama serai dan daun jeruk.', '5. Sajikan dengan tauge pendek, sambal terasi, dan telur asin.'],
-    prepTime: '90 Menit',
-    servings: '4 Porsi'
+    desc: 'Makanan khas Sulawesi Utara yang terbuat dari campuran beras, sayuran segar, seperti labu kuning, bayam, kangkung, dan jagung. Memiliki tekstur lembut, rasa gurih, serta kaya akan nutrisi dan serat. Biasanya disajikan dengan sambal roa dan ikan asin.',
+    ingredients: ['200 gram beras, 150 gram labu kuning, 1 buah jagung manis, 1 ikat kangkung, 1 ikat bayam, 1 batang serai, 1 batang daun bawang, 1 liter air, garam dan kaldu bubuk secukupnya.'],
+    steps: ['1. Rebus beras bersama air dan serai hingga beras mulai menjadi bubur. 2. Masukkan jagung manis dan labu kuning, masak hingga empuk. 3. Aduk sesekali agar bubur tidak gosong di bagian bawah. 4. Tambahkan garam dan kaldu bubuk secukupnya. 5. Masukkan kangkung dan bayam, aduk hingga sayuran layu. 6. Tambahkan daun bawang, lalu masak hingga semua bahan matang dan tekstur bubur mengental. 7. Angkat dan sajikan selagi hangat.'],
+    prepTime: '60 menit',
+    servings: '4-5  Porsi'
   },
   {
     id: 'soto-banjar',
