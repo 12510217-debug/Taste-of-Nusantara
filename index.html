@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Taste of Nusantara</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+
+  <div id="navbar"></div>
+
+  <main>
+    <section class="hero-section d-flex align-items-center">
+      <div class="container py-5">
+        <div class="col-lg-7 text-white">
+          <p class="text-uppercase fw-bold mb-2" style="color: var(--accent-orange); letter-spacing: 2px;">
+            DISCOVER INDONESIAN CUISINE
+          </p>
+          <h1 class="fw-bold font-serif mb-3 display-3" style="letter-spacing: 1px;">
+            Explore the Taste<br>of Indonesia.
+          </h1>
+          <p class="lead mb-4 text-light opacity-85 fs-6" style="letter-spacing: 0.5px;">
+            Kenali kekayaan kuliner Nusantara melalui berbagai makanan khas, resep autentik, dan sejarah dari berbagai pulau di Indonesia.
+          </p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="heavy.html" class="btn btn-custom-secondary px-4 py-3">
+              Explore Foods &rarr;
+            </a>
+            <a href="map.html" class="btn btn-outline-light rounded-pill px-4 py-3 fw-bold">
+              <i class="fa-solid fa-map-location-dot me-2"></i> Jelajahi Peta
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-bold" style="color: var(--accent-red); letter-spacing: 2px;">DISCOVER</p>
+        <h2 class="display-5 fw-bold mb-3">10 Flavors of Nusantara</h2>
+        <p class="text-muted lead fs-6">Jelajahi ikon kuliner paling lezat yang menjadi kebanggaan budaya Indonesia.</p>
+      </div>
+      <div class="row g-4" id="home-flavors-grid"></div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // Tampilkan 8 kuliner pertama di halaman Home
+    const grid = document.getElementById('home-flavors-grid');
+    grid.innerHTML = getAllCulinaryItems().slice(0, 8).map(item =>
+      recipeCardHTML(item, 'col-md-3 col-sm-6', 'Lihat Resep &rarr;', 'btn-custom-secondary', true)
+    ).join('');
+  </script>
+</body>
+</html>

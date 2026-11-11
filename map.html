@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peta Kuliner - Taste of Nusantara</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="map">
+
+  <div id="navbar"></div>
+
+  <main>
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <span class="badge badge-island mb-2 px-3 py-2 fs-6">Interactive Map</span>
+        <h1 class="display-5 fw-bold">Jelajah Kuliner & Sejarah Nusantara</h1>
+        <p class="text-muted">Klik tombol pulau atau pin pada peta untuk melihat sejarah dan 5 makanan khasnya.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="card card-nusantara mb-3">
+            <div class="card-body">
+              <h5 class="fw-bold text-success mb-3">Peta Indonesia (Satelit)</h5>
+              <div id="map"></div>
+            </div>
+          </div>
+          <div class="card card-nusantara">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Pilih Pulau:</h6>
+              <div class="d-grid gap-2" id="island-buttons"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="card card-nusantara h-100">
+            <div class="card-body p-4" id="content-display">
+              <div class="text-center text-muted py-5">
+                <i class="fa-solid fa-location-dot display-4 text-success mb-3"></i>
+                <h4>Silakan pilih salah satu pulau</h4>
+                <p>Klik tombol atau marker pada peta untuk memuat informasi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // ----- Peta interaktif Leaflet -----
+    const leafletMap = L.map('map', { center: [-2.5, 118.0], zoom: 5, minZoom: 4, maxZoom: 9 });
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 18,
+      attribution: 'Tiles &copy; Esri'
+    }).addTo(leafletMap);
+    leafletMap.setMaxBounds([[-11, 94], [6, 142]]);
+
+    function showIslandInfo(key) {
+      const d = islandData[key];
+      leafletMap.flyTo(d.coords, d.zoom, { animate: true, duration: 2.0, easeLinearity: 0.25 });
+      document.getElementById('content-display').innerHTML = `
+        <h3 class="fw-bold text-success mb-2">Pulau ${d.label}</h3>
+        <h5 class="fw-semibold text-secondary fs-6">Sejarah singkat</h5>
+        <p class="text-muted small">${d.history}</p>
+        <hr>
+        <h5 class="fw-semibold text-danger mb-3 fs-6">5 Makanan Khas</h5>
+        <div class="row g-2">
+          ${d.foods.map(([n, desc], i) => `
+            <div class="col-md-6">
+              <div class="card island-food-card h-100 bg-light border-0 p-3">
+                <h6 class="fw-bold mb-1 text-dark">${i + 1}. ${n}</h6>
+                <p class="small text-muted mb-0">${desc}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    const box = document.getElementById('island-buttons');
+    Object.entries(islandData).forEach(([key, d]) => {
+      L.marker(d.coords).addTo(leafletMap)
+        .bindTooltip(`<b>Pulau ${d.label}</b>`, { direction: 'top', offset: [0, -10] })
+        .on('click', () => showIslandInfo(key));
+
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-outline-success text-start fw-semibold btn-sm rounded-pill py-2 px-3';
+      btn.innerHTML = `<i class="fa-solid fa-location-dot me-1"></i> Pulau ${d.label}`;
+      btn.onclick = () => showIslandInfo(key);
+      box.appendChild(btn);
+    });
+    setTimeout(() => leafletMap.invalidateSize(), 50);
+  </script>
+</body>
+</html>
