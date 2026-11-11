@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Resep - Taste of Nusantara</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="input-recipe">
+
+  <div id="navbar"></div>
+
+  <main>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card card-nusantara p-4 p-md-5">
+            <div class="text-center mb-4">
+              <span class="badge bg-success mb-2 px-3 py-2">Kontribusi Komunitas</span>
+              <h2 class="fw-bold">Tambah Resep Kuliner Nusantara</h2>
+              <p class="text-muted">Bagikan resep rahasia keluarga atau daerah Anda agar dapat dinikmati seluruh Indonesia.</p>
+            </div>
+            <form onsubmit="handleUserRecipeSubmit(event)">
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Nama Makanan</label>
+                <input type="text" id="usr-name" class="form-control" required placeholder="Contoh: Sate Padang Pariaman">
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Asal Pulau / Daerah</label>
+                  <select id="usr-island" class="form-select" required>
+                    <option value="Sumatra">Sumatra</option>
+                    <option value="Jawa">Jawa</option>
+                    <option value="Kalimantan">Kalimantan</option>
+                    <option value="Sulawesi">Sulawesi</option>
+                    <option value="Papua">Papua</option>
+                    <option value="Bali">Bali</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Kategori</label>
+                  <select id="usr-category" class="form-select" required>
+                    <option value="heavy">Makanan Berat</option>
+                    <option value="snacks">Makanan Ringan</option>
+                    <option value="diet">Makanan Diet/Sehat</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">URL Foto Makanan</label>
+                <input type="url" id="usr-image" class="form-control" required placeholder="https://images.unsplash.com/photo-...">
+                <div class="form-text">Gunakan link gambar langsung dari Unsplash atau internet.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Deskripsi Singkat</label>
+                <textarea id="usr-desc" class="form-control" rows="2" required placeholder="Penjelasan singkat mengenai kelezatan kuliner ini..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Bahan-Bahan (Pisahkan dengan baris baru)</label>
+                <textarea id="usr-ingredients" class="form-control" rows="4" required placeholder="500g daging sapi&#10;3 lembar daun jeruk&#10;..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Langkah-Langkah Pembuatan</label>
+                <textarea id="usr-steps" class="form-control" rows="5" required placeholder="1. Haluskan bumbu...&#10;2. Tumis hingga harum..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-custom-primary w-100 py-3">Simpan & Publikasikan Resep</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script>
+    function handleUserRecipeSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('usr-name').value;
+      const island = document.getElementById('usr-island').value;
+      const category = document.getElementById('usr-category').value;
+      const image = document.getElementById('usr-image').value;
+      const desc = document.getElementById('usr-desc').value;
+      const ingredients = document.getElementById('usr-ingredients').value.split('\n').filter(Boolean);
+      const steps = document.getElementById('usr-steps').value.split('\n').filter(Boolean);
+
+      const newRecipe = {
+        id: 'usr_' + Date.now(),
+        name, island, category, image, desc, ingredients, steps,
+        prepTime: '45 Menit',
+        servings: '4 Porsi'
+      };
+
+      const userRecipes = getUserRecipes();
+      userRecipes.push(newRecipe);
+      localStorage.setItem('user_recipes', JSON.stringify(userRecipes));
+
+      showToast('Resep berhasil ditambahkan dan disimpan!');
+      e.target.reset();
+
+      // Pindah ke halaman kategori resep tadi setelah toast terlihat sebentar
+      setTimeout(() => { window.location.href = category + '.html'; }, 1200);
+    }
+  </script>
+</body>
+</html>
