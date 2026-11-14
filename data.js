@@ -41,7 +41,7 @@ const culinaryData = [
     name: 'Gudeg Yogyakarta',
     island: 'Jawa',
     category: 'heavy',
-    image: 'Gudeg.jpg',
+    image: 'assets/images/Gudeg.jpg',
     desc: 'Olahan nangka muda (gori) yang dimasak berjam-jam dengan gula jawa dan santan, menghasilkan rasa manis gurih khas Jawa.',
     ingredients: ['1 kg Nangka muda, potong-potong', '1 liter Santan', '200g Gula jawa, sisir', 'Bumbu halus: Bawang merah, bawang putih, kemiri, ketumbar', 'Daun salam, lengkuas, daun jeruk'],
     steps: ['1. Susun daun salam dan lengkuas di dasar panci.', '2. Masukkan nangka muda, taburi gula jawa, dan siram bumbu halus serta santan.', '3. Masak dengan api kecil tertutup selama 4 hingga 5 jam hingga nangka berwarna kemerahan dan empuk.', '4. Sajikan dengan opor ayam, sambal krecek, dan nasi hangat.'],
